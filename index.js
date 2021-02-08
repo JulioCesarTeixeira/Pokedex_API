@@ -21,7 +21,7 @@ async function getPokemonImg(id) {
 
     let img = await getPokemonImg(id);
 
-    console.log(id, name);
+    console.log(input);
     console.log(img);
 
     document.getElementById("pokemon-id").src = img;
@@ -34,11 +34,11 @@ async function getPokemonImg(id) {
 //     return await pokemon.json();
 // }
 // console.log(pokemonInfo());
+document.addEventListener("DOMContentLoaded", function(event){
+document.querySelector('button').addEventListener('click', async () => {
 
-document.getElementById('run').addEventListener('click', async () => {
-
+    let input = document.getElementById("pokemon-id").value;
     let pokemon = await getPokemon(input);
-
     let id = pokemon.id;
     let name = pokemon.name;
 
@@ -65,3 +65,4 @@ document.getElementById('run').addEventListener('click', async () => {
 
     target.append(pokemonResult);
 })
+});
