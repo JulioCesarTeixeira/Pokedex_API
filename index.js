@@ -49,8 +49,9 @@ document.getElementById('run').addEventListener('click', async () => {
     let pokemonResult = template.cloneNode(true);
 
     pokemonResult.querySelector('.name').innerHTML = name;
-    pokemonResult.querySelector('.img-pokemon').innerHTML = img;
     pokemonResult.querySelector(".ID-number").innerHTML = id;
+
+    pokemonResult.querySelector('.img-pokemon').innerHTML = img;
     // pokemonResult.querySelector('.moves').innerText = pokemon.abilities.name;
 
     // Marte's evolution function
