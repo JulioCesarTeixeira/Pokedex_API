@@ -5,28 +5,22 @@ async function getPokemon(input) {
     return await pokemon.json();
 }
 
-async function getPokemonImg(id) {
-    let img = await fetch("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png");
-    let imgBlob = await img.blob()
-    return URL.createObjectURL(imgBlob);
-}
-
-(async () => {
-
-    let input = "18";
-    let pokemon = await getPokemon(input);
-
-    let id = pokemon.id;
-    let name = pokemon.name;
-
-    let img = await getPokemonImg(id);
-
-    console.log(input);
-    console.log(img);
-
-    document.getElementById("pokemon-id").src = img;
-
-})();
+// (async () => {
+//
+//     let input = "57";
+//     let pokemon = await getPokemon(input);
+//
+//     let id = pokemon.id;
+//     let name = pokemon.name;
+//     let img = pokemon.sprites.front_default;
+//
+//     console.log(id, name);
+//
+//     let image = document.createElement("img");
+//     image.src = pokemon.sprites.front_default;
+//     document.getElementById("target").appendChild(image);
+//
+// })();
 
 
 // async function pokemonInfo()  {
@@ -34,15 +28,17 @@ async function getPokemonImg(id) {
 //     return await pokemon.json();
 // }
 // console.log(pokemonInfo());
+
 document.addEventListener("DOMContentLoaded", function(event){
-document.querySelector('button').addEventListener('click', async () => {
+document.getElementById('run').addEventListener('click', async () => {
 
     let input = document.getElementById("pokemon-id").value;
     let pokemon = await getPokemon(input);
+
     let id = pokemon.id;
     let name = pokemon.name;
 
-    let img = await getPokemonImg(id);
+    let img = pokemon.sprites.front_default;
 
     let target = document.getElementById("target");
     let template = document.getElementById("tpl-pokemon").content;
@@ -64,5 +60,4 @@ document.querySelector('button').addEventListener('click', async () => {
 
 
     target.append(pokemonResult);
-})
-});
+})})
