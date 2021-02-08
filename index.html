@@ -12,27 +12,38 @@
 
 <h3>Ugly, but functional Pokedex</h3>
 <div class="container">
-    <template id="tpl-pokemon">
-        <li class="pokemon">
-            <h4 class="title">
-                <strong class="name"></strong>
-                <em class="ID-number"></em>
-            </h4>
-            <p class="moves"></p>
-        </li>
-        <li class="img-pokemon">
-        </li>
-        <li class="img-evolution">
-        </li>
-    </template>
     <div class="input-container">
         <label for="pokemon-id"></label>
-        <input type="text" name="pokemon-id" id="pokemon-id" />
+        <input type="text" name="pokemon-id" id="pokemon-id"/>
     </div>
     <div class="button-container">
         <button type="button" id="run">Find your Pokemon!</button>
     </div>
-    <ol id="target"></ol>
+    <div id="tpl-pokemon">
+        <ul>
+            <li class="pokemon">
+                <h4 class="title">
+                    Name and ID:
+                    <strong class="name">Bulbasaur</strong>
+                    <em class="ID-number">1</em>
+                </h4>
+                <p class="moves"></p>
+            </li>
+            <li>
+                <img id="img-pokemon" src="" alt="pokemon">
+            </li>
+            <li>
+                <h4>Previous evolutions</h4>
+                <p class="prev-evolution"></p>
+                <img id="img-prev-evolution" src="" alt="evolution">
+            </li>
+            <li>
+                <h4>Next evolutions</h4>
+                <p class="next-evolution"></p>
+                <img id="img-next-evolution" src="" alt="evolution">
+            </li>
+        </ul>
+    </div>
 </div>
 
 </body>

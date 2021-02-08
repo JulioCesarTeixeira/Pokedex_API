@@ -5,29 +5,15 @@ async function getPokemon(input) {
     return await pokemon.json();
 }
 
-// (async () => {
-//
-//     let input = "57";
-//     let pokemon = await getPokemon(input);
-//
-//     let id = pokemon.id;
-//     let name = pokemon.name;
-//     let img = pokemon.sprites.front_default;
-//
-//     console.log(id, name);
-//
-//     let image = document.createElement("img");
-//     image.src = pokemon.sprites.front_default;
-//     document.getElementById("target").appendChild(image);
-//
-// })();
+async function getSpecies(pokemon){
+    let species = await fetch(pokemon.species.url);
+    return await species.json();
+}
 
-
-// async function pokemonInfo()  {
-//     const pokemon = await fetch('https://pokeapi.co/api/v2/pokemon/' + input)
-//     return await pokemon.json();
-// }
-// console.log(pokemonInfo());
+async function getEvolutionChain(url){
+    let evolutionChain = await fetch(url);
+    return await evolutionChain.json();
+}
 
 document.addEventListener("DOMContentLoaded", function(event){
 document.getElementById('run').addEventListener('click', async () => {
@@ -37,28 +23,51 @@ document.getElementById('run').addEventListener('click', async () => {
 
     let id = pokemon.id;
     let name = pokemon.name;
+    let imgSrc = pokemon.sprites.front_default;
 
-    let img = pokemon.sprites.front_default;
+    let target = document.getElementById("tpl-pokemon");
+    // let template = document.getElementById("tpl-pokemon").content;
+    // let pokemonResult = template.cloneNode(true);
 
-    let target = document.getElementById("target");
-    let template = document.getElementById("tpl-pokemon").content;
-    let pokemonResult = template.cloneNode(true);
+    target.querySelector('.name').innerHTML = name;
+    target.querySelector(".ID-number").innerHTML = id;
+    document.getElementById("img-pokemon").src = imgSrc;
 
-    pokemonResult.querySelector('.name').innerHTML = name;
-    pokemonResult.querySelector(".ID-number").innerHTML = id;
-
-    pokemonResult.querySelector('.img-pokemon').innerHTML = img;
     // pokemonResult.querySelector('.moves').innerText = pokemon.abilities.name;
 
     // Marte's evolution function
 
-    
+    let species = await getSpecies(pokemon);
+
+    // show name and picture of previous evolution
+    if(species.evolves_from_species != null){
+
+        let evolution = species.evolves_from_species.name;
+        let evolutionPokemon = await getPokemon(evolution);
+
+        target.querySelector(".prev-evolution").innerHTML = evolution;
+
+        document.getElementById("img-prev-evolution").src = evolutionPokemon.sprites.front_default;
+    }
+    else{
+        target.querySelector(".prev-evolution").innerHTML = "There is no previous evolution";
+    }
+
+    // show pictures of next evolutions
+    let evolutionUrl = species.evolution_chain.url;
+    let evolutionChain = await getEvolutionChain(evolutionUrl);
+
+    console.log(evolutionChain);
+
+    let evolution1 = evolutionChain.chain.evolves_to[0];
+    console.log(evolution1.species);
+
+    let evolution2 = evolution1.evolves_to[0];
+    console.log(evolution2.species);
+
+
 
 
     // Julio's moves function
 
-
-
-
-    target.append(pokemonResult);
 })})
