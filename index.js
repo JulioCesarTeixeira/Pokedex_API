@@ -29,35 +29,39 @@ async function getPokemon(input) {
 // }
 // console.log(pokemonInfo());
 
-document.addEventListener("DOMContentLoaded", function(event){
-document.getElementById('run').addEventListener('click', async () => {
+document.addEventListener("DOMContentLoaded", function (event) {
+    document.getElementById('run').addEventListener('click', async () => {
 
-    let input = document.getElementById("pokemon-id").value;
-    let pokemon = await getPokemon(input);
+        let input = document.getElementById("pokemon-id").value;
+        let pokemon = await getPokemon(input);
 
-    let id = pokemon.id;
-    let name = pokemon.name;
+        let id = pokemon.id;
+        let namePokemon = pokemon.name;
+        let theMoves = pokemon.moves;
+        let moveLimit = theMoves.sort(() => 0.5 - Math.random());
+        //let moves = moveLimit.slice(0, 4);
 
-    let img = pokemon.sprites.front_default;
-
-    let target = document.getElementById("target");
-    let template = document.getElementById("tpl-pokemon").content;
-    let pokemonResult = template.cloneNode(true);
-
-    pokemonResult.querySelector('.name').innerHTML = name;
-    pokemonResult.querySelector('.img-pokemon').innerHTML = img;
-    pokemonResult.querySelector(".ID-number").innerHTML = id;
-    // pokemonResult.querySelector('.moves').innerText = pokemon.abilities.name;
-
-    // Marte's evolution function
-
-    
+        let img = pokemon.sprites.front_default;
 
 
-    // Julio's moves function
+        let target = document.getElementById("target");
+        let template = document.getElementById("tpl-pokemon").content;
+        let pokemonResult = template.cloneNode(true);
+
+        pokemonResult.querySelector('.name').innerHTML = namePokemon;
+        pokemonResult.querySelector('.img-pokemon').innerHTML = img;
+        pokemonResult.querySelector(".ID-number").innerHTML = id;
+        pokemonResult.querySelector('.moves').innerHTML = moveLimit[1].move.name;
+
+
+        // Marte's evolution function
+
+
+        // Julio's moves function
 
 
 
 
-    target.append(pokemonResult);
-})})
+        target.append(pokemonResult);
+    })
+})
