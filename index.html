@@ -6,9 +6,34 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="index.js"></script>
-    <title>Document</title>
+    <title>Pokedex</title>
 </head>
 <body>
-<img class="img-fluid" id="pokemon-id" width="60" src="" alt="pokemon">
+
+<h3>Ugly, but functional Pokedex</h3>
+<div class="container">
+    <template id="tpl-pokemon">
+        <li class="pokemon">
+            <h4 class="title">
+                <strong class="name"></strong>
+                <em class="ID-number"></em>
+            </h4>
+            <p class="moves"></p>
+        </li>
+        <li class="img-pokemon">
+        </li>
+        <li class="img-evolution">
+        </li>
+    </template>
+    <div class="input-container">
+        <label for="pokemon-id"></label>
+        <input type="text" name="pokemon-id" id="pokemon-id" />
+    </div>
+    <div class="button-container">
+        <button type="button" id="run">Find your Pokemon!</button>
+    </div>
+    <ol id="target"></ol>
+</div>
+
 </body>
 </html>

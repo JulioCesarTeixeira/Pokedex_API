@@ -46,3 +46,4 @@ async function getPokemonImg(id) {
 
 
 //Julio territory - input
+
