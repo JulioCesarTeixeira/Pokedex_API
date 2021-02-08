@@ -40,10 +40,6 @@ document.getElementById('run').addEventListener('click', async () => {
 
     let img = pokemon.sprites.front_default;
 
-    let image = document.createElement("img");
-    image.src = pokemon.sprites.front_default;
-    document.getElementById("target").appendChild(image);
-
     let target = document.getElementById("target");
     let template = document.getElementById("tpl-pokemon").content;
     let pokemonResult = template.cloneNode(true);
@@ -56,7 +52,7 @@ document.getElementById('run').addEventListener('click', async () => {
 
     // Marte's evolution function
 
-
+    
 
 
     // Julio's moves function
