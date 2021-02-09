@@ -1,15 +1,21 @@
 
-body{
+body {
 	font-family: Montserrat, sans-serif;
+	min-height: 100%;
 	height: 100vh;
 	width: 100vw;
 
 	justify-content: start;
 	align-items: center;
 	background-image: url("../imgs/pikachu.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
 
 }
-.container{
+
+.container {
 	display: grid;
 	align-items: center;
 	align-content: center;
@@ -18,35 +24,39 @@ body{
 	padding: 20px;
 }
 
-img{
+img {
 	height: 100px;
 	width: 100px;
 }
 
-#logo{
-	height: 30%;
-	width: 100%;
+#logo {
+	display: block;
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto;
 }
 
-ul{
+ul {
 	list-style: none;
 }
 
-h4{
+h4 {
 	text-align: center;
 	font-size: 2rem;
 }
 
 #img-pokemon .hidden {
-    display: none;
+	display: none;
 }
 
 /*input*/
-#pokemon-id:focus{
+#pokemon-id:focus {
 	border: 3px solid #555;
 }
+
 /*input styling*/
-#pokemon-id{
+#pokemon-id {
 	box-sizing: border-box;
 	border-radius: 5px;
 	position: relative;
@@ -58,7 +68,7 @@ h4{
 	padding: 12px 12px 12px 40px;
 }
 
-#all-evolutions{
+#all-evolutions {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -70,20 +80,20 @@ h4{
 	flex-wrap: wrap;
 }
 
-.pokemon{
+.pokemon {
 	display: block;
 	flex-direction: column;
 	justify-content: center;
 	margin: 0 auto;
 }
 
-.right-container{
+.right-container {
 	display: block;
 	margin: 0 auto;
 
 }
 
-.pokemon-wrapper{
+.pokemon-wrapper {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-gap: 20px;
@@ -91,7 +101,7 @@ h4{
 	align-items: start;
 }
 
-#img-pokemon{
+#img-pokemon {
 	width: 15vw;
 	height: auto;
 	justify-content: flex-start;
@@ -103,26 +113,26 @@ h4{
 	transition: .3s ease-in-out;
 }
 
-#img-pokemon:hover{
+#img-pokemon:hover {
 	-webkit-transform: scale(1.3);
 	transform: scale(1.3);
 }
 
 .hidden {
-	display: none!important;
+	display: none !important;
 }
 
-.title{
+.title {
 	text-align: center;
 	justify-content: center;
 }
 
-.search-wrapper{
+.search-wrapper {
 	display: block;
 	margin: 0 auto;
 }
 
-#get-moves{
+#get-moves {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: repeat(2, 1fr);
@@ -130,11 +140,12 @@ h4{
 	justify-content: center;
 	grid-gap: 10px;
 }
-#get-moves p{
+
+#get-moves p {
 	text-align: center;
 }
 
-#tpl-pokemon{
+#tpl-pokemon {
 	margin: 30px;
 	background-color: #ffffff;
 	border: 1px solid black;
@@ -142,20 +153,20 @@ h4{
 	border-radius: 5px;
 }
 
-#tpl-pokemon p{
+#tpl-pokemon p {
 	font-weight: bold;
 	color: #000000;
 	font-size: 1.5rem;
 }
 
-#evolution-images div img{
+#evolution-images div img {
 	-webkit-transform: scale(1);
 	transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
 }
 
-#evolution-images div:hover img{
+#evolution-images div:hover img {
 	cursor: pointer;
 	-webkit-transform: scale(1.3);
 	transform: scale(1.3);
