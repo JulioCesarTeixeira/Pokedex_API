@@ -1,5 +1,6 @@
 // fetch function
 
+
 async function getPokemon(input) {
     let pokemon = await fetch("https://pokeapi.co/api/v2/pokemon/" + input);
     return await pokemon.json();
@@ -19,9 +20,12 @@ async function getEvolutionChain(url) {
 document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById('pokemon-id').addEventListener('keyup', async () => {
 
-        const getMoves = document.getElementById('get-moves');
         let input = document.getElementById("pokemon-id").value;
         let pokemon = await getPokemon(input);
+        const getMoves = document.getElementById('get-moves');
+        let id = pokemon.id;
+        let namePoke = pokemon.name;
+        let imgSrc = pokemon.sprites.front_default;
 
         //get 4 random moves and display them
         let theMoves = pokemon.moves;
@@ -35,10 +39,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             getMoves.append(moveNames);
         }
 
-        let id = pokemon.id;
-        let namePoke = pokemon.name;
-        let imgSrc = pokemon.sprites.front_default;
-
 
         let target = document.getElementById("tpl-pokemon");
 
@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         target.querySelector('.name').innerHTML = namePoke;
         target.querySelector(".ID-number").innerHTML = id;
         document.getElementById("img-pokemon").src = imgSrc;
-
 
         // Marte's evolution function
 
@@ -61,13 +60,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
             target.querySelector(".prev-evolution").innerHTML = evolution;
 
             document.getElementById("img-prev-evolution").src = evolutionPokemon.sprites.front_default;
-        } else {
+        }
+        else {
             target.querySelector(".prev-evolution").innerHTML = "There is no previous evolution";
             // who is this pokemon - Julio
             document.getElementById("img-prev-evolution").src = "imgs/who.jpg";
         }
 
-        // show pictures of next evolutions
+        // show picture of next evolution
         let evolutionUrl = species.evolution_chain.url;
         let evolutionChain = await getEvolutionChain(evolutionUrl);
 
@@ -79,9 +79,31 @@ document.addEventListener("DOMContentLoaded", function (event) {
         let evolution2 = evolution1.evolves_to[0];
         console.log(evolution2.species);
 
+        if(pokemon.name === evolution1.species.name){
+            document.getElementById("prev-evolution").classList.remove("hidden")
+            let evolutionPokemon = await getPokemon(evolution1.species.name);
+            document.getElementById("img-next-evolution").src = evolutionPokemon.sprites.front_default;
+        }
+        else if(pokemon.name === evolution1.species.name){
+            document.getElementById("prev-evolution").classList.remove("hidden")
+            let evolutionPokemon = await getPokemon(evolution2.species.name);
+            document.getElementById("img-next-evolution").src = evolutionPokemon.sprites.front_default;
+        }
+
+        // show all evolutions
+        document.getElementById("all-evolutions").querySelectorAll("img").forEach((img, i) => {
+
+        })
 
 
 
 
-    })
-})
+        // way to hide empty pictures or evolution
+        // -> CSS class (.hidden) in which we put display: hidden
+        // when no previous or next evolution (or when we refresh/open window) we add this class to the parent element
+        // when there is a evolution we remove this class
+
+
+
+
+})})

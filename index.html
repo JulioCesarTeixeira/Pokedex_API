@@ -17,8 +17,8 @@
 <h3>Ugly, but functional Pokedex</h3>
 <div class="container">
         <div class="input-container">
-            <label for="pokemon-id">Pokemon ID or Name</label>
-            <input type="text" name="pokemon-id" id="pokemon-id"/>
+            <label for="pokemon-id"></label>
+            <input type="text" name="pokemon-id" id="pokemon-id" placeholder="Pokemon ID or Name"/>
         </div>
     <div id="tpl-pokemon">
         <ul>
@@ -36,15 +36,11 @@
 
                         <div id="get-moves"></div>
                     </li>
-                    <li>
-                        <h4>Previous evolutions</h4>
-                        <p class="prev-evolution"></p>
-                        <img id="img-prev-evolution" src="" alt="evolution">
-                    </li>
-                    <li>
-                        <h4>Next evolutions</h4>
-                        <p class="next-evolution"></p>
-                        <img id="img-next-evolution" src="" alt="evolution">
+                    <li id="all-evolutions" class="hidden">
+                        <h4>All the evolutions</h4>
+                        <img id="evolution1" src="" alt="evolution">
+                        <img id="evolution2" src="" alt="evolution">
+                        <img id="evolution3" src="" alt="evolution">
                     </li>
                 </div>
             </div>
