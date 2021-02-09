@@ -17,7 +17,7 @@ async function getEvolutionChain(url) {
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    document.getElementById('run').addEventListener('click', async () => {
+    document.getElementById('pokemon-id').addEventListener('keyup', async () => {
 
         const getMoves = document.getElementById('get-moves');
         let input = document.getElementById("pokemon-id").value;
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log(evolution2.species);
 
 
-        // Julio's moves function
+
 
 
     })
