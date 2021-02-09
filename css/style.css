@@ -26,7 +26,6 @@ img{
 #logo{
 	height: 30%;
 	width: 100%;
-
 }
 
 ul{
@@ -37,7 +36,6 @@ h4{
 	text-align: center;
 	font-size: 2rem;
 }
-
 
 #img-pokemon .hidden {
     display: none;
@@ -83,7 +81,7 @@ h4{
 	grid-template-columns: repeat(3, 1fr);
 	grid-gap: 20px;
 	justify-self: center;
-	align-items: center;
+	align-items: start;
 }
 
 #all-evolutions{
@@ -96,10 +94,15 @@ h4{
 	justify-content: flex-start;
 	border: 2px solid orange;
 	margin: 10px;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
 }
 
 #img-pokemon:hover{
-
+	-webkit-transform: scale(1.3);
+	transform: scale(1.3);
 }
 
 .hidden {
@@ -124,6 +127,9 @@ h4{
 	justify-content: center;
 	grid-gap: 10px;
 }
+#get-moves p{
+	text-align: center;
+}
 
 #tpl-pokemon{
 	margin: 30px;
@@ -137,4 +143,19 @@ h4{
 #tpl-pokemon p{
 	font-weight: bold;
 	color: #000000;
+	font-size: 1.5rem;
 }
+
+#evolution-images div img{
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+#evolution-images div:hover img{
+	cursor: pointer;
+	-webkit-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
