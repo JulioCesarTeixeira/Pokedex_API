@@ -1,20 +1,17 @@
 // fetch function
 
-
 async function getPokemon(input) {
     let pokemon = await fetch("https://pokeapi.co/api/v2/pokemon/" + input);
     return await pokemon.json();
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    document.getElementById('run').addEventListener('click', async () => {
+    document.getElementById('pokemon-id').addEventListener('keyup', async () => {
 
         let target = document.getElementById("tpl-pokemon");
-    document.getElementById('pokemon-id').addEventListener('keyup', async () => {
 
         let input = document.getElementById("pokemon-id").value;
         let pokemon = await getPokemon(input);
-        const getMoves = document.getElementById('get-moves');
         let id = pokemon.id;
         let namePoke = pokemon.name;
         const getMoves = document.getElementById('get-moves');
@@ -60,6 +57,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         async function displayEvolutions(pokemon) {
 
+            document.getElementById("all-evolutions").classList.remove("hidden");
+
             let species = await getSpecies(pokemon);
             let evolutionUrl = species.evolution_chain.url;
             let evolutionChain = await getEvolutionChain(evolutionUrl);
@@ -67,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.getElementById("evolution").classList.remove("hidden");
 
             if (evolutionChain.chain.evolves_to.length === 0) {
-                document.getElementById("evolution").classList.add("hidden");
+                document.getElementById("all-evolutions").classList.add("hidden");
                 return;
             }
 
@@ -81,7 +80,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 await displayPicture(basicPokemon, "basicPokemon");
                 await displayPicture(evolution1, "evolution1");
                 document.getElementById("evolution2").classList.add("hidden");
-
             } else if (evolutionChain.chain.evolves_to[0].evolves_to.length === 1) {
                 let evolution2 = evolutionChain.chain.evolves_to[0].evolves_to[0].species.name;
                 document.getElementById("evolution2").classList.remove("hidden");
@@ -90,5 +88,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 await displayPicture(evolution2, "evolution2");
             }
         }
+
     })
 })
