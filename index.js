@@ -6,7 +6,7 @@ async function getPokemon(input) {
     return await pokemon.json();
 }
 
-        document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById('pokemon-id').addEventListener('keyup', async () => {
 
         let target = document.getElementById("tpl-pokemon");
@@ -25,13 +25,12 @@ async function getPokemon(input) {
         for (let i = 0; i < moves.length; i++) {
             let moveNames = document.createElement('p');
             moveNames.innerText = moves[i].move.name;
-            //console.log(getMoves);
             getMoves.append(moveNames);
         }
 
         //display name and id
         target.querySelector('.name').innerHTML = namePoke;
-        target.querySelector(".ID-number").innerHTML = id +" - ";
+        target.querySelector(".ID-number").innerHTML = id + " - ";
 
         // display picture of input pokemon
         await displayPicture(namePoke, "img-pokemon");
@@ -43,7 +42,6 @@ async function getPokemon(input) {
         }
 
         // the evolution part of the code
-
         async function getSpecies(pokemon) {
             let species = await fetch(pokemon.species.url);
             return await species.json();
@@ -56,6 +54,7 @@ async function getPokemon(input) {
 
         await displayEvolutions(pokemon);
 
+        // function to
         async function displayEvolutions(pokemon) {
 
             document.getElementById("all-evolutions").classList.remove("hidden");
@@ -64,41 +63,72 @@ async function getPokemon(input) {
             let evolutionUrl = species.evolution_chain.url;
             let evolutionChain = await getEvolutionChain(evolutionUrl);
 
-            document.getElementById("evolution").classList.remove("hidden");
+            document.getElementById("evolution-images").classList.remove("hidden");
 
             if (evolutionChain.chain.evolves_to.length === 0) {
                 document.getElementById("all-evolutions").classList.add("hidden");
                 return;
             }
 
-            let basicPokemon = evolutionChain.chain.species.name;
+            let evolution0 = evolutionChain.chain.species.name;
             let evolution1 = evolutionChain.chain.evolves_to[0].species.name;
+
+            console.log(evolution0);
+            console.log(evolution1);
 
             console.log(evolutionChain.chain.evolves_to.length);
             console.log(evolutionChain.chain.evolves_to[0].evolves_to.length);
 
             if (evolutionChain.chain.evolves_to.length === 1 && evolutionChain.chain.evolves_to[0].evolves_to.length === 0) {
-                await displayPicture(basicPokemon, "basicPokemon");
-                await displayPicture(evolution1, "evolution1");
+                await displayEvolutionPicture(evolution0, "evolution0");
+                await displayEvolutionPicture(evolution1, "evolution1");
+
                 document.getElementById("evolution2").classList.add("hidden");
                 document.getElementById("evolution3").classList.add("hidden");
-            } else if (evolutionChain.chain.evolves_to[0].evolves_to.length === 1) {
+            }
+            else if (evolutionChain.chain.evolves_to[0].evolves_to.length === 1) {
                 let evolution2 = evolutionChain.chain.evolves_to[0].evolves_to[0].species.name;
+
                 document.getElementById("evolution2").classList.remove("hidden");
                 document.getElementById("evolution3").classList.add("hidden");
-                await displayPicture(basicPokemon, "basicPokemon");
-                await displayPicture(evolution1, "evolution1");
-                await displayPicture(evolution2, "evolution2");
+
+                await displayEvolutionPicture(evolution0, "evolution0");
+                await displayEvolutionPicture(evolution1, "evolution1");
+                await displayEvolutionPicture(evolution2, "evolution2");
             }
-            else if(evolutionChain.chain.evolves_to.length === 1 && evolutionChain.chain.evolves_to[0].evolves_to.length === 2){
+            else if (evolutionChain.chain.evolves_to.length === 1 && evolutionChain.chain.evolves_to[0].evolves_to.length === 2) {
                 let evolution2 = evolutionChain.chain.evolves_to[0].evolves_to[0].species.name;
                 let evolution3 = evolutionChain.chain.evolves_to[0].evolves_to[1].species.name;
+
                 document.getElementById("evolution2").classList.remove("hidden");
-                await displayPicture(basicPokemon, "basicPokemon");
-                await displayPicture(evolution1, "evolution1");
-                await displayPicture(evolution2, "evolution2");
-                await displayPicture(evolution3, "evolution3");
+
+                await displayEvolutionPicture(evolution0, "evolution0");
+                await displayEvolutionPicture(evolution1, "evolution1");
+                await displayEvolutionPicture(evolution2, "evolution2");
+                await displayEvolutionPicture(evolution3, "evolution3");
             }
+
+            async function displayEvolutionPicture(namePoke, elementId) {
+                let pokemonToDisplay = await getPokemon(namePoke);
+                let imgElement = document.getElementById(elementId).querySelector("img");
+                imgElement.id = namePoke;
+
+                document.getElementById(elementId).classList.remove("hidden");
+                imgElement.src = pokemonToDisplay.sprites.front_default;
+            }
+
+            // when you click on the image of an evolution, go to that pokemon
         }
     })
+
+    document.getElementById("evolution-images").querySelectorAll("img").forEach((img, index) => {
+        img.addEventListener("click", () => {
+            document.getElementById("pokemon-id").value = img.id;
+            let event = document.createEvent('KeyboardEvent');
+            event.initEvent('keyup', false, false);
+            document.getElementById("pokemon-id").dispatchEvent(event);
+        })
+    })
+
+
 })
