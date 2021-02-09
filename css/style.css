@@ -60,18 +60,20 @@ h3{
 }
 
 .pokemon{
-	justify-content: flex-start;
+	display: block;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
 }
 
 .right-container{
 	display: block;
 	margin: 0 auto;
-
 }
 
 .pokemon-wrapper{
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	grid-gap: 20px;
 	justify-self: center;
 	align-items: center;
@@ -82,8 +84,8 @@ h3{
 }
 
 #img-pokemon{
-	width: 65%;
-	height: 65%;
+	width: 15vw;
+	height: auto;
 	justify-content: flex-start;
 }
 
@@ -92,6 +94,7 @@ h3{
 }
 
 .title{
+	text-align: center;
 	justify-content: center;
 }
 
