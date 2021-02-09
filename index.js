@@ -121,8 +121,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                     displayPicture(pokemonName, newImg.id);
                 })
-
-
             }
 
             async function displayEvolutionPicture(namePoke, elementId) {
