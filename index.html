@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="index.js"></script>
+    <link rel="stylesheet" href="css/style.css">
     <title>Pokedex</title>
 </head>
 <body>
@@ -33,14 +34,24 @@
                 <img id="img-pokemon" src="" alt="pokemon">
             </li>
             <li>
-                <h4>Previous evolutions</h4>
-                <p class="prev-evolution"></p>
-                <img id="img-prev-evolution" src="" alt="evolution">
+                <h4>Previous evolution</h4>
+                <div id="prev-evolution" class="hidden">
+                    <p class="prev-evolution"></p>
+                    <img id="img-prev-evolution" src="" alt="evolution">
+                </div>
             </li>
             <li>
-                <h4>Next evolutions</h4>
-                <p class="next-evolution"></p>
-                <img id="img-next-evolution" src="" alt="evolution">
+                <h4>Next evolution</h4>
+                <div id="next-evolution" class="hidden">
+                    <p class="next-evolution"></p>
+                    <img id="img-next-evolution" src="" alt="evolution">
+                </div>
+            </li>
+            <li id="all-evolutions">
+                <h4>All the evolutions</h4>
+                <img id="evolution1" src="" alt="evolution">
+                <img id="evolution2" src="" alt="evolution">
+                <img id="evolution3" src="" alt="evolution">
             </li>
         </ul>
     </div>
