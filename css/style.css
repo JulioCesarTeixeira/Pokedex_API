@@ -62,6 +62,13 @@ h4{
 
 #all-evolutions{
 	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+#evolution-images {
+	display: flex;
+	flex-direction: row;
 	flex-wrap: wrap;
 }
 
@@ -84,10 +91,6 @@ h4{
 	grid-gap: 20px;
 	justify-self: center;
 	align-items: center;
-}
-
-#all-evolutions{
-	flex-direction: column;
 }
 
 #img-pokemon{
@@ -132,7 +135,6 @@ h4{
 	opacity: 0.8;
 	border-radius: 5px;
 }
-
 
 #tpl-pokemon p{
 	font-weight: bold;

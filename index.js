@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         async function displayEvolutions(pokemon) {
 
             document.getElementById("all-evolutions").classList.remove("hidden");
+            document.getElementById("extra-evolutions").querySelectorAll("img").forEach(img => {img.remove()}) ;
 
             let species = await getSpecies(pokemon);
             let evolutionUrl = species.evolution_chain.url;
@@ -107,6 +108,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 await displayEvolutionPicture(evolution2, "evolution2");
                 await displayEvolutionPicture(evolution3, "evolution3");
             }
+            else if(evolutionChain.chain.evolves_to.length > 1){
+                evolutionChain.chain.evolves_to.forEach((evolution, index) => {
+
+                    let pokemonName = evolution.species.name;
+                    let newImg = document.createElement("img");
+                    newImg.id = "pokemon-evolution-" + index;
+
+                    document.getElementById("evolution-images").classList.add("hidden");
+                    document.getElementById("extra-evolutions").classList.remove("hidden");
+                    document.getElementById("extra-evolutions").appendChild(newImg);
+
+                    displayPicture(pokemonName, newImg.id);
+                })
+
+
+            }
 
             async function displayEvolutionPicture(namePoke, elementId) {
                 let pokemonToDisplay = await getPokemon(namePoke);
@@ -116,12 +133,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 document.getElementById(elementId).classList.remove("hidden");
                 imgElement.src = pokemonToDisplay.sprites.front_default;
             }
-
-            // when you click on the image of an evolution, go to that pokemon
         }
     })
 
-    document.getElementById("evolution-images").querySelectorAll("img").forEach((img, index) => {
+    // when you click on the image of an evolution, go to that pokemon
+    document.getElementById("all-evolutions").querySelectorAll("img").forEach((img, index) => {
         img.addEventListener("click", () => {
             document.getElementById("pokemon-id").value = img.id;
             let event = document.createEvent('KeyboardEvent');
@@ -129,6 +145,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.getElementById("pokemon-id").dispatchEvent(event);
         })
     })
-
-
 })
