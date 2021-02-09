@@ -28,4 +28,4 @@ There are a couple of pokemon that don't play with the normal rules, add code so
 * Eevee has 6 evolutions.
 
 ## The result ##
-![picture alt](/imgs/readme.png)
+![picture alt](./imgs/result.png)
