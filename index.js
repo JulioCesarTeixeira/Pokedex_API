@@ -1,15 +1,15 @@
 // fetch function
 
+
 async function getPokemon(input) {
     let pokemon = await fetch("https://pokeapi.co/api/v2/pokemon/" + input);
     return await pokemon.json();
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+        document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById('pokemon-id').addEventListener('keyup', async () => {
 
         let target = document.getElementById("tpl-pokemon");
-
         let input = document.getElementById("pokemon-id").value;
         let pokemon = await getPokemon(input);
         let id = pokemon.id;
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         //display name and id
         target.querySelector('.name').innerHTML = namePoke;
-        target.querySelector(".ID-number").innerHTML = id;
+        target.querySelector(".ID-number").innerHTML = id +" - ";
 
         // display picture of input pokemon
         await displayPicture(namePoke, "img-pokemon");
@@ -88,6 +88,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 await displayPicture(evolution2, "evolution2");
             }
         }
-
     })
 })
