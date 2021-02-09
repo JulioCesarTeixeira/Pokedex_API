@@ -11,7 +11,6 @@ body{
 }
 .container{
 	display: grid;
-	justify-content: center;
 	align-items: center;
 	align-content: center;
 	margin-left: auto;
@@ -64,12 +63,17 @@ h3{
 }
 
 .right-container{
-	justify-content: flex-end;
+	display: block;
+	margin: 0 auto;
+
 }
 
 .pokemon-wrapper{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 20px;
+	justify-self: center;
+	align-items: center;
 }
 
 #img-pokemon{
@@ -79,4 +83,18 @@ h3{
 }
 .title{
 	justify-content: center;
+}
+
+.search-wrapper{
+	display: block;
+	margin: 0 auto;
+}
+
+#get-moves{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	font-weight: bold;
+	justify-content: center;
+	grid-gap: 15px;
 }
