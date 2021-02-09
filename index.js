@@ -1,4 +1,5 @@
-// the fetch functions to get our pokemon, species and evolutionchain
+// fetch function
+
 
 async function getPokemon(input) {
     let pokemon = await fetch("https://pokeapi.co/api/v2/pokemon/" + input);
@@ -9,8 +10,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById('run').addEventListener('click', async () => {
 
         let target = document.getElementById("tpl-pokemon");
+    document.getElementById('pokemon-id').addEventListener('keyup', async () => {
+
         let input = document.getElementById("pokemon-id").value;
         let pokemon = await getPokemon(input);
+        const getMoves = document.getElementById('get-moves');
         let id = pokemon.id;
         let namePoke = pokemon.name;
         const getMoves = document.getElementById('get-moves');
