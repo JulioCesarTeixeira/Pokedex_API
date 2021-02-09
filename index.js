@@ -41,44 +41,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.getElementById(elementId).src = pokemonToDisplay.sprites.front_default;
         }
 
-        // the evolution part of the code
+        // fetch function to get the species object linked to our pokemon
         async function getSpecies(pokemon) {
             let species = await fetch(pokemon.species.url);
             return await species.json();
         }
 
+        // fetch function to get the evolutionchain object from our specific species
         async function getEvolutionChain(url) {
             let evolutionChain = await fetch(url);
             return await evolutionChain.json();
         }
 
+        // function to actually display the images of the evolution
         await displayEvolutions(pokemon);
 
-        // function to
         async function displayEvolutions(pokemon) {
 
             document.getElementById("all-evolutions").classList.remove("hidden");
+            document.getElementById("evolution-images").classList.remove("hidden");
             document.getElementById("extra-evolutions").querySelectorAll("img").forEach(img => {img.remove()}) ;
 
             let species = await getSpecies(pokemon);
-            let evolutionUrl = species.evolution_chain.url;
-            let evolutionChain = await getEvolutionChain(evolutionUrl);
+            let evolutionChain = await getEvolutionChain(species.evolution_chain.url);
 
-            document.getElementById("evolution-images").classList.remove("hidden");
-
+            // if there are no evolutions we have to get out of this function call and not display any evolutions
             if (evolutionChain.chain.evolves_to.length === 0) {
                 document.getElementById("all-evolutions").classList.add("hidden");
                 return;
             }
 
+            // if there is at least one evolution we continue with at least our evolution 0 and 1 so we can define them already
             let evolution0 = evolutionChain.chain.species.name;
             let evolution1 = evolutionChain.chain.evolves_to[0].species.name;
-
-            console.log(evolution0);
-            console.log(evolution1);
-
-            console.log(evolutionChain.chain.evolves_to.length);
-            console.log(evolutionChain.chain.evolves_to[0].evolves_to.length);
 
             if (evolutionChain.chain.evolves_to.length === 1 && evolutionChain.chain.evolves_to[0].evolves_to.length === 0) {
                 await displayEvolutionPicture(evolution0, "evolution0");
@@ -87,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 document.getElementById("evolution2").classList.add("hidden");
                 document.getElementById("evolution3").classList.add("hidden");
             }
+
             else if (evolutionChain.chain.evolves_to[0].evolves_to.length === 1) {
                 let evolution2 = evolutionChain.chain.evolves_to[0].evolves_to[0].species.name;
 
@@ -119,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     document.getElementById("extra-evolutions").classList.remove("hidden");
                     document.getElementById("extra-evolutions").appendChild(newImg);
 
-                    displayPicture(pokemonName, newImg.id);
+                    displayExtraEvolutionPicture(pokemonName, newImg.id);
                 })
             }
 
@@ -131,16 +127,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 document.getElementById(elementId).classList.remove("hidden");
                 imgElement.src = pokemonToDisplay.sprites.front_default;
             }
+
+            async function displayExtraEvolutionPicture(namePoke, elementId) {
+                let pokemonToDisplay = await getPokemon(namePoke);
+                let imgElement = document.getElementById(elementId);
+
+                imgElement.id = namePoke;
+                imgElement.classList.remove("hidden");
+                imgElement.src = pokemonToDisplay.sprites.front_default;
+            }
         }
+
+        document.getElementById("all-evolutions").querySelectorAll("img").forEach((img, index) => {
+            img.addEventListener("click", () => {
+                document.getElementById("pokemon-id").value = img.id;
+                let event = document.createEvent('KeyboardEvent');
+                event.initEvent('keyup', false, false);
+                document.getElementById("pokemon-id").dispatchEvent(event);
+            })
+        })
     })
 
     // when you click on the image of an evolution, go to that pokemon
-    document.getElementById("all-evolutions").querySelectorAll("img").forEach((img, index) => {
-        img.addEventListener("click", () => {
-            document.getElementById("pokemon-id").value = img.id;
-            let event = document.createEvent('KeyboardEvent');
-            event.initEvent('keyup', false, false);
-            document.getElementById("pokemon-id").dispatchEvent(event);
-        })
-    })
+
 })
