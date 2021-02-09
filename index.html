@@ -6,42 +6,53 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="index.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
     <title>Pokedex</title>
 </head>
 <body>
 
 <h3>Ugly, but functional Pokedex</h3>
 <div class="container">
-    <div class="input-container">
-        <label for="pokemon-id"></label>
-        <input type="text" name="pokemon-id" id="pokemon-id"/>
-    </div>
-    <div class="button-container">
-        <button type="button" id="run">Find your Pokemon!</button>
+    <div class="search-wrapper">
+        <div class="input-container">
+            <label for="pokemon-id">Pokemon ID or Name</label>
+            <input type="text" name="pokemon-id" id="pokemon-id"/>
+        </div>
+        <div class="button-container">
+            <button type="button" id="run">Find your Pokemon!</button>
+        </div>
     </div>
     <div id="tpl-pokemon">
         <ul>
-            <li class="pokemon">
-                <h4 class="title">
-                    Name and ID:
-                    <strong class="name">Bulbasaur</strong>
-                    <em class="ID-number">1</em>
-                </h4>
-                <p class="moves"></p>
-            </li>
-            <li>
-                <img id="img-pokemon" src="" alt="pokemon">
-            </li>
-            <li>
-                <h4>Previous evolutions</h4>
-                <p class="prev-evolution"></p>
-                <img id="img-prev-evolution" src="" alt="evolution">
-            </li>
-            <li>
-                <h4>Next evolutions</h4>
-                <p class="next-evolution"></p>
-                <img id="img-next-evolution" src="" alt="evolution">
-            </li>
+            <div class="pokemon-wrapper">
+                <li class="pokemon">
+                    <h4 class="title">
+                        Name and ID:
+                        <strong class="name">Bulbasaur</strong>
+                        <em class="ID-number">1</em>
+                    </h4>
+                    <img id="img-pokemon" src="" alt="pokemon">
+                </li>
+                <div class="right-container">
+                    <li>
+
+                        <div id="get-moves"></div>
+                    </li>
+                    <li>
+                        <h4>Previous evolutions</h4>
+                        <p class="prev-evolution"></p>
+                        <img id="img-prev-evolution" src="" alt="evolution">
+                    </li>
+                    <li>
+                        <h4>Next evolutions</h4>
+                        <p class="next-evolution"></p>
+                        <img id="img-next-evolution" src="" alt="evolution">
+                    </li>
+                </div>
+            </div>
         </ul>
     </div>
 </div>
