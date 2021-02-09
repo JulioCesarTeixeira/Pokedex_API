@@ -57,6 +57,8 @@ async function getPokemon(input) {
 
         async function displayEvolutions(pokemon) {
 
+            document.getElementById("all-evolutions").classList.remove("hidden");
+
             let species = await getSpecies(pokemon);
             let evolutionUrl = species.evolution_chain.url;
             let evolutionChain = await getEvolutionChain(evolutionUrl);
@@ -64,7 +66,7 @@ async function getPokemon(input) {
             document.getElementById("evolution").classList.remove("hidden");
 
             if (evolutionChain.chain.evolves_to.length === 0) {
-                document.getElementById("evolution").classList.add("hidden");
+                document.getElementById("all-evolutions").classList.add("hidden");
                 return;
             }
 
@@ -78,7 +80,6 @@ async function getPokemon(input) {
                 await displayPicture(basicPokemon, "basicPokemon");
                 await displayPicture(evolution1, "evolution1");
                 document.getElementById("evolution2").classList.add("hidden");
-
             } else if (evolutionChain.chain.evolves_to[0].evolves_to.length === 1) {
                 let evolution2 = evolutionChain.chain.evolves_to[0].evolves_to[0].species.name;
                 document.getElementById("evolution2").classList.remove("hidden");
