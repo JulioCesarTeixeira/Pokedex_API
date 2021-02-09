@@ -109,5 +109,5 @@ h3{
 	grid-template-rows: repeat(2, 1fr);
 	font-weight: bold;
 	justify-content: center;
-	grid-gap: 15px;
+	grid-gap: 10px;
 }
