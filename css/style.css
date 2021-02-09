@@ -33,9 +33,10 @@ h3{
 }
 
 
-.hidden {
+#img-pokemon .hidden {
     display: none;
 }
+
 /*input*/
 #pokemon-id:focus{
 	border: 3px solid #555;
@@ -76,11 +77,20 @@ h3{
 	align-items: center;
 }
 
+#all-evolutions{
+	flex-direction: column;
+}
+
 #img-pokemon{
 	width: 65%;
 	height: 65%;
 	justify-content: flex-start;
 }
+
+.hidden {
+	display: none!important;
+}
+
 .title{
 	justify-content: center;
 }

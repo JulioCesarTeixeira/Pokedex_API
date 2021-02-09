@@ -17,6 +17,7 @@ async function getPokemon(input) {
         const getMoves = document.getElementById('get-moves');
 
         //get 4 random moves and display them
+        document.getElementById("moves").classList.remove("hidden");
         let theMoves = pokemon.moves;
         let moves = theMoves.sort(() => 0.5 - Math.random());
         moves = moves.slice(0, 4);
@@ -80,12 +81,23 @@ async function getPokemon(input) {
                 await displayPicture(basicPokemon, "basicPokemon");
                 await displayPicture(evolution1, "evolution1");
                 document.getElementById("evolution2").classList.add("hidden");
+                document.getElementById("evolution3").classList.add("hidden");
             } else if (evolutionChain.chain.evolves_to[0].evolves_to.length === 1) {
                 let evolution2 = evolutionChain.chain.evolves_to[0].evolves_to[0].species.name;
+                document.getElementById("evolution2").classList.remove("hidden");
+                document.getElementById("evolution3").classList.add("hidden");
+                await displayPicture(basicPokemon, "basicPokemon");
+                await displayPicture(evolution1, "evolution1");
+                await displayPicture(evolution2, "evolution2");
+            }
+            else if(evolutionChain.chain.evolves_to.length === 1 && evolutionChain.chain.evolves_to[0].evolves_to.length === 2){
+                let evolution2 = evolutionChain.chain.evolves_to[0].evolves_to[0].species.name;
+                let evolution3 = evolutionChain.chain.evolves_to[0].evolves_to[1].species.name;
                 document.getElementById("evolution2").classList.remove("hidden");
                 await displayPicture(basicPokemon, "basicPokemon");
                 await displayPicture(evolution1, "evolution1");
                 await displayPicture(evolution2, "evolution2");
+                await displayPicture(evolution3, "evolution3");
             }
         }
     })
