@@ -24,22 +24,30 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         let input = document.getElementById("pokemon-id").value;
         let pokemon = await getPokemon(input);
-
-
-        let theMoves = pokemon.moves;
-        let moveLimit = theMoves.sort(() => 0.5 - Math.random());
-        //let moves = moveLimit.slice(0, 4);
+        const getMoves = document.getElementById('get-moves');
         let id = pokemon.id;
-        let name = pokemon.name;
+        let namePoke = pokemon.name;
         let imgSrc = pokemon.sprites.front_default;
+
+        //get 4 random moves and display them
+        let theMoves = pokemon.moves;
+        let moves = theMoves.sort(() => 0.5 - Math.random());
+        moves = moves.slice(0, 4);
+        getMoves.innerText = "";
+        for (let i = 0; i < moves.length; i++) {
+            let moveNames = document.createElement('p');
+            moveNames.innerText = moves[i].move.name;
+            //console.log(getMoves);
+            getMoves.append(moveNames);
+        }
+
 
         let target = document.getElementById("tpl-pokemon");
 
 
-        target.querySelector('.name').innerHTML = name;
+        target.querySelector('.name').innerHTML = namePoke;
         target.querySelector(".ID-number").innerHTML = id;
         document.getElementById("img-pokemon").src = imgSrc;
-
 
         // Marte's evolution function
 
@@ -54,6 +62,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
             target.querySelector(".prev-evolution").innerHTML = evolution;
 
             document.getElementById("img-prev-evolution").src = evolutionPokemon.sprites.front_default;
+        }
+        else {
+            target.querySelector(".prev-evolution").innerHTML = "There is no previous evolution";
+            // who is this pokemon - Julio
+            document.getElementById("img-prev-evolution").src = "imgs/who.jpg";
         }
 
         // show picture of next evolution
@@ -92,8 +105,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         // when no previous or next evolution (or when we refresh/open window) we add this class to the parent element
         // when there is a evolution we remove this class
 
-        // Julio's moves function
 
 
-    })
-})
+
+})})
