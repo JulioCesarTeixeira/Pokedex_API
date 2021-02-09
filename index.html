@@ -16,31 +16,36 @@
 
 <h3>Ugly, but functional Pokedex</h3>
 <div class="container">
+    <div class="search-wrapper">
         <div class="input-container">
             <label for="pokemon-id"></label>
             <input type="text" name="pokemon-id" id="pokemon-id" placeholder="Pokemon ID or Name"/>
         </div>
+    </div>
     <div id="tpl-pokemon">
         <ul>
             <div class="pokemon-wrapper">
                 <li class="pokemon">
                     <h4 class="title">
-                        Name and ID:
-                        <strong class="name">Bulbasaur</strong>
-                        <em class="ID-number">1</em>
+                        <p>
+                            <em class="ID-number"></em>
+                            <strong class="name"></strong>
+
                     </h4>
-                    <img id="img-pokemon" src="" alt="pokemon">
+                    <img id="img-pokemon" src="" class="hidden" alt="pokemon">
                 </li>
                 <div class="right-container">
                     <li>
-
+                        <h4  class="hidden">Moves</h4>
                         <div id="get-moves"></div>
                     </li>
-                    <li id="all-evolutions" class="hidden">
-                        <h4>All the evolutions</h4>
-                        <img id="evolution1" src="" alt="evolution">
-                        <img id="evolution2" src="" alt="evolution">
-                        <img id="evolution3" src="" alt="evolution">
+                    <li id="all-evolutions">
+                        <h4  class="hidden">Evolutions</h4>
+                        <div id="evolution" class="hidden">
+                            <img id="basicPokemon" src="" alt="evolution">
+                            <img id="evolution1" src="" alt="evolution">
+                            <img id="evolution2" src="" alt="evolution">
+                        </div>
                     </li>
                 </div>
             </div>

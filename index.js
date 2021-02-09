@@ -6,26 +6,15 @@ async function getPokemon(input) {
     return await pokemon.json();
 }
 
-async function getSpecies(pokemon) {
-    let species = await fetch(pokemon.species.url);
-    return await species.json();
-}
-
-async function getEvolutionChain(url) {
-    let evolutionChain = await fetch(url);
-    return await evolutionChain.json();
-}
-
-
-document.addEventListener("DOMContentLoaded", function (event) {
+        document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById('pokemon-id').addEventListener('keyup', async () => {
 
+        let target = document.getElementById("tpl-pokemon");
         let input = document.getElementById("pokemon-id").value;
         let pokemon = await getPokemon(input);
-        const getMoves = document.getElementById('get-moves');
         let id = pokemon.id;
         let namePoke = pokemon.name;
-        let imgSrc = pokemon.sprites.front_default;
+        const getMoves = document.getElementById('get-moves');
 
         //get 4 random moves and display them
         let theMoves = pokemon.moves;
@@ -39,71 +28,64 @@ document.addEventListener("DOMContentLoaded", function (event) {
             getMoves.append(moveNames);
         }
 
-
-        let target = document.getElementById("tpl-pokemon");
-
-
+        //display name and id
         target.querySelector('.name').innerHTML = namePoke;
-        target.querySelector(".ID-number").innerHTML = id;
-        document.getElementById("img-pokemon").src = imgSrc;
+        target.querySelector(".ID-number").innerHTML = id +" - ";
 
-        // Marte's evolution function
+        // display picture of input pokemon
+        await displayPicture(namePoke, "img-pokemon");
 
-        let species = await getSpecies(pokemon);
-
-        // show name and picture of previous evolution
-        if (species.evolves_from_species != null) {
-
-            let evolution = species.evolves_from_species.name;
-            let evolutionPokemon = await getPokemon(evolution);
-
-            target.querySelector(".prev-evolution").innerHTML = evolution;
-
-            document.getElementById("img-prev-evolution").src = evolutionPokemon.sprites.front_default;
-        }
-        else {
-            target.querySelector(".prev-evolution").innerHTML = "There is no previous evolution";
-            // who is this pokemon - Julio
-            document.getElementById("img-prev-evolution").src = "imgs/who.jpg";
+        async function displayPicture(namePoke, elementId) {
+            let pokemonToDisplay = await getPokemon(namePoke);
+            document.getElementById(elementId).classList.remove("hidden");
+            document.getElementById(elementId).src = pokemonToDisplay.sprites.front_default;
         }
 
-        // show picture of next evolution
-        let evolutionUrl = species.evolution_chain.url;
-        let evolutionChain = await getEvolutionChain(evolutionUrl);
+        // the evolution part of the code
 
-        console.log(evolutionChain);
-
-        let evolution1 = evolutionChain.chain.evolves_to[0];
-        console.log(evolution1.species);
-
-        let evolution2 = evolution1.evolves_to[0];
-        console.log(evolution2.species);
-
-        if(pokemon.name === evolution1.species.name){
-            document.getElementById("prev-evolution").classList.remove("hidden")
-            let evolutionPokemon = await getPokemon(evolution1.species.name);
-            document.getElementById("img-next-evolution").src = evolutionPokemon.sprites.front_default;
-        }
-        else if(pokemon.name === evolution1.species.name){
-            document.getElementById("prev-evolution").classList.remove("hidden")
-            let evolutionPokemon = await getPokemon(evolution2.species.name);
-            document.getElementById("img-next-evolution").src = evolutionPokemon.sprites.front_default;
+        async function getSpecies(pokemon) {
+            let species = await fetch(pokemon.species.url);
+            return await species.json();
         }
 
-        // show all evolutions
-        document.getElementById("all-evolutions").querySelectorAll("img").forEach((img, i) => {
+        async function getEvolutionChain(url) {
+            let evolutionChain = await fetch(url);
+            return await evolutionChain.json();
+        }
 
-        })
+        await displayEvolutions(pokemon);
 
+        async function displayEvolutions(pokemon) {
 
+            let species = await getSpecies(pokemon);
+            let evolutionUrl = species.evolution_chain.url;
+            let evolutionChain = await getEvolutionChain(evolutionUrl);
 
+            document.getElementById("evolution").classList.remove("hidden");
 
-        // way to hide empty pictures or evolution
-        // -> CSS class (.hidden) in which we put display: hidden
-        // when no previous or next evolution (or when we refresh/open window) we add this class to the parent element
-        // when there is a evolution we remove this class
+            if (evolutionChain.chain.evolves_to.length === 0) {
+                document.getElementById("evolution").classList.add("hidden");
+                return;
+            }
 
+            let basicPokemon = evolutionChain.chain.species.name;
+            let evolution1 = evolutionChain.chain.evolves_to[0].species.name;
 
+            console.log(evolutionChain.chain.evolves_to.length);
+            console.log(evolutionChain.chain.evolves_to[0].evolves_to.length);
 
+            if (evolutionChain.chain.evolves_to.length === 1 && evolutionChain.chain.evolves_to[0].evolves_to.length === 0) {
+                await displayPicture(basicPokemon, "basicPokemon");
+                await displayPicture(evolution1, "evolution1");
+                document.getElementById("evolution2").classList.add("hidden");
 
-})})
+            } else if (evolutionChain.chain.evolves_to[0].evolves_to.length === 1) {
+                let evolution2 = evolutionChain.chain.evolves_to[0].evolves_to[0].species.name;
+                document.getElementById("evolution2").classList.remove("hidden");
+                await displayPicture(basicPokemon, "basicPokemon");
+                await displayPicture(evolution1, "evolution1");
+                await displayPicture(evolution2, "evolution2");
+            }
+        }
+    })
+})

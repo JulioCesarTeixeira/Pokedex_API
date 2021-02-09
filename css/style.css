@@ -6,7 +6,7 @@ body{
 
 	justify-content: start;
 	align-items: center;
-	background-image: url("../imgs/pikachu.jpg");
+	background-image: url("../imgs/pikachu.jpg");;
 
 }
 .container{
@@ -70,4 +70,13 @@ h3{
 .pokemon-wrapper{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+}
+
+#img-pokemon{
+	width: 65%;
+	height: 65%;
+	justify-content: flex-start;
+}
+.title{
+	justify-content: center;
 }
