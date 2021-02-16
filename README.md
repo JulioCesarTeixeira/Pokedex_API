@@ -8,7 +8,7 @@ For our training at BeCode we (Julio and Marte) worked on a Pokedex. You can fin
 * DOM manipulation: changing the DOM based on results of AJAX-requests.
 
 ## The exercise ##
-Make a Pokédex using [this API](https://pokeapi.co/).
+Make a Pokédex using the [PokeAPI](https://pokeapi.co/).
 
 Basic functionality that is expected (read: core features):
 
