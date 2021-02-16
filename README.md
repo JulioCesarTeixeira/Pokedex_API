@@ -1,4 +1,4 @@
-# The Pokemon Memory Game #
+# Javascript Pokedex #
 
 For our training at BeCode we (Julio and Marte) worked on a Pokedex. You can find our finished result [here](https://juliocesarteixeira.github.io/Pokedex_API/index.html).
 
